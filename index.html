@@ -7,16 +7,20 @@
 
   <style>
     :root{
-      --bg1:#fff0f6;
-      --bg2:#ffe3f1;
-      --card: rgba(255,255,255,.78);
-      --card2: rgba(255,255,255,.62);
-      --text:#3a2133;
-      --muted:#4b2a3b;
-      --accent:#ff4d9a;
-      --accent2:#ff89c2;
-      --line: rgba(255,77,154,.35);
-      --shadow: 0 18px 60px rgba(255,77,154,.18);
+      --bg1:#ffe0f0;                 /* พื้นหลังชมพูหวาน */
+  --bg2:#ffc7e2;
+
+  --card: rgba(255,255,255,.92); /* การ์ดขาวทึบขึ้น = อ่านชัด */
+  --card2: rgba(255,255,255,.88);
+
+  --text:#2a0e1e;                /* ตัวอักษรเข้ม */
+  --muted:#6a1f46;               /* ข้อความรองชมพูเข้ม */
+
+  --accent:#ff2a83;              /* ชมพูเข้ม (ปุ่ม/ไฮไลต์) */
+  --accent2:#ff78b7;
+
+  --line: rgba(255,42,131,.48);  /* เส้นขอบชมพูชัด */
+  --shadow: 0 20px 80px rgba(255,42,131,.28);
     }
     *{box-sizing:border-box}
     body{
@@ -25,10 +29,10 @@
       color:var(--text);
       min-height:100vh;
       background:
-        radial-gradient(900px 600px at 15% 10%, rgba(255,77,154,.20) 0%, transparent 55%),
-        radial-gradient(900px 600px at 85% 20%, rgba(255,137,194,.22) 0%, transparent 55%),
-        radial-gradient(800px 520px at 50% 90%, rgba(255,255,255,.95) 0%, transparent 65%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
+         radial-gradient(900px 600px at 15% 10%, rgba(255,42,131,.28) 0%, transparent 55%),
+  radial-gradient(900px 600px at 85% 20%, rgba(255,120,183,.26) 0%, transparent 55%),
+  radial-gradient(800px 520px at 50% 90%, rgba(255,255,255,.96) 0%, transparent 65%),
+  linear-gradient(180deg, var(--bg1), var(--bg2));
     }
     .wrap{max-width:980px;margin:0 auto;padding:22px}
     .hero{
@@ -74,6 +78,15 @@
     }
     .card.soft{ background:var(--card2); }
     .muted{color:var(--muted)}
+    .pill .muted{
+  color: rgba(58,33,51,.92);
+}
+.pill p.muted{
+  font-weight: 600;
+}
+#after{
+  color: rgba(58,33,51,.78);
+}
     .small{font-size:13px;color:rgba(107,75,93,.88); line-height:1.5}
 
     .btn{
@@ -122,7 +135,7 @@
       border-radius:18px;
       padding:12px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.88);
+     background: rgba(255,255,255,.94);
     }
     .minirow{display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
     .minirow .btn{width:auto; padding:10px 12px; border-radius:14px}
@@ -215,7 +228,7 @@
 
       <div style="margin-top:10px; display:grid; gap:10px">
         <button class="btn" id="unlockBtn">ปลดล็อก (เริ่มเพลงให้ด้วย) 🎵</button>
-        <button class="btn ghost" id="muteAllBtn">ปิดเสียงทั้งหมดก่อน (ถ้าตกใจ 😳)</button>
+        <!-- <button class="btn ghost" id="muteAllBtn">ปิดเสียงทั้งหมดก่อน (ถ้าตกใจ 😳)</button> -->
       </div>
 
       
@@ -267,7 +280,7 @@
 
           <div class="player">
             <div class="pill">
-              <div class="muted" style="margin-bottom:8px">เพลงพื้นหลัง (bgm.mp3)</div>
+              <div class="muted" style="margin-bottom:8px">เพลงพื้นหลัง</div>
 
               <div class="minirow">
                 <button class="btn" id="bgmBtn">▶️ เล่น</button>
@@ -280,14 +293,14 @@
               </div>
 
               <div class="status" id="bgmStatus">สถานะ: รอเช็กไฟล์…</div>
-              <div class="small">มือถือจะให้เล่นหลัง “กดปุ่ม” เท่านั้น (ปกติเลย)</div>
+             
             </div>
 
             <div class="pill">
-              <div class="muted" style="margin-bottom:8px">เสียงที่เราอัดไว้ (voice.mp3)</div>
+              <div class="muted" style="margin-bottom:8px">เสียงอะไรนะ</div>
 
               <div class="minirow">
-                <button class="btn" id="voiceBtn">🎙️ กดฟังเสียงเรา</button>
+                <button class="btn" id="voiceBtn">🎙️ กดจริงหรอ</button>
                 <button class="btn ghost" id="voiceStop">⏹ หยุด</button>
               </div>
 
@@ -326,25 +339,23 @@
         <div class="ph"><img src="image/img6.jpg" alt=""></div>
 
       </div>
-      <p class="muted" style="margin-top:10px">
-        ทิป: ถ้าใช้ GitHub Pages ให้อัปโหลดรูปไว้ในโฟลเดอร์ <b>photos</b> แล้วเปลี่ยน src เป็น <b>photos/ชื่อไฟล์.jpg</b>
-      </p>
+      
     </div>
 
     <div class="section">
       <h2>ไทม์ไลน์ความทรงจำ 🗓️</h2>
       <div class="timeline">
         <div class="item"><b>🌷 วันที่เราเริ่มคบกัน</b><div class="muted">25/07/2025</div></div>
-        <div class="item"><b>🍰 เดทที่เราชอบที่สุด</b><div class="muted">ใส่เรื่องราวน่ารัก ๆ ตรงนี้</div></div>
+        <div class="item"><b>🍰 เดทที่เราชอบที่สุด</b><div class="muted">ความสุขของเราไม่ได้อยู่ที่ว่าไปไหน แต่มันอยู่ที่ว่าไปกับใคร ซึ่งคนนั้นคือเธอ</div></div>
         <div class="item"><b>📷 รูปที่ทำให้ยิ้มทุกที</b><div class="muted">ใส่ความหมายของรูปนั้น</div></div>
-        <div class="item"><b>💞 คำสัญญา</b><div class="muted">เราอยากดูแลเธอให้ดีที่สุด</div></div>
+        <div class="item"><b>💞 คำสัญญา</b><div class="muted">เค้าจะตั้งใจรักเธอ และอยู่กับเธอไปนาน 💖</div></div>
       </div>
     </div>
 
     <div class="section card">
       <h2 style="margin:0 0 8px">ข้อความลับท้ายสุด 🤫</h2>
       <p class="muted" style="margin:0;line-height:1.8" id="finalMsg">
-        ขอบคุณที่ทำให้ทุกวันของเราหวานขึ้น 💖
+        เค้ารักเธอที่สุดเลยนะครับ 💖
       </p>
     </div>
   </div>
