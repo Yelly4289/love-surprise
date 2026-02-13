@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>สำหรับคนพิเศษของเรา 💖</title>
+  <style>
+    :root{
+      --bg1:#0b1020; --bg2:#1a0f2e;
+      --card: rgba(255,255,255,.08);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.7);
+      --accent:#ff5fa2;
+      --accent2:#7c5cff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: radial-gradient(1200px 700px at 20% 10%, #2b1b63 0%, transparent 55%),
+                  radial-gradient(900px 600px at 80% 20%, #7a1b5a 0%, transparent 55%),
+                  linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+    }
+    a{color:inherit}
+    .wrap{max-width:980px;margin:0 auto;padding:24px}
+    .hero{
+      padding:28px 18px; border-radius:22px;
+      background: linear-gradient(135deg, rgba(255,95,162,.18), rgba(124,92,255,.14));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: 0 16px 60px rgba(0,0,0,.35);
+      position:relative; overflow:hidden;
+    }
+    .badge{display:inline-flex;gap:8px;align-items:center;
+      padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.12); color:var(--muted); font-size:14px;
+    }
+    h1{margin:14px 0 6px;font-size:40px;letter-spacing:-.02em}
+    .sub{margin:0;color:var(--muted);font-size:16px;line-height:1.6}
+    .grid{display:grid;gap:16px;grid-template-columns: 1.2fr .8fr; margin-top:18px}
+    @media (max-width:860px){ .grid{grid-template-columns:1fr} h1{font-size:34px} }
+    .card{
+      background:var(--card); border:1px solid rgba(255,255,255,.12);
+      border-radius:20px; padding:16px;
+    }
+    .btn{
+      appearance:none;border:none;cursor:pointer;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:white; padding:12px 16px; border-radius:14px;
+      font-weight:700; width:100%;
+      box-shadow: 0 10px 30px rgba(255,95,162,.22);
+    }
+    .btn:active{transform:translateY(1px)}
+    .muted{color:var(--muted)}
+    .row{display:flex;gap:10px;align-items:center}
+    input{
+      width:100%; padding:12px 14px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.18); color:var(--text);
+      outline:none;
+    }
+    .section{margin-top:22px}
+    .section h2{margin:0 0 10px;font-size:22px}
+    .gallery{
+      display:grid; gap:10px;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    @media (max-width:860px){ .gallery{grid-template-columns: repeat(2, 1fr);} }
+    .ph{
+      aspect-ratio:1/1; border-radius:16px;
+      overflow:hidden; border:1px solid rgba(255,255,255,.12);
+      cursor:pointer; position:relative;
+      background:rgba(255,255,255,.06);
+    }
+    .ph img{width:100%;height:100%;object-fit:cover;display:block}
+    .timeline{display:grid;gap:10px}
+    .item{padding:14px;border-radius:16px;background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12)}
+    .item b{display:block;margin-bottom:4px}
+    /* overlay lock */
+    .lock{
+      position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+      z-index:50; padding:18px;
+    }
+    .lockbox{
+      width:min(520px, 100%); border-radius:22px; padding:18px;
+      background: rgba(20,15,40,.86);
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: 0 22px 80px rgba(0,0,0,.55);
+    }
+    .lockbox h3{margin:0 0 6px;font-size:20px}
+    .lockbox p{margin:0 0 12px;color:var(--muted);line-height:1.6}
+    .small{font-size:13px;color:rgba(255,255,255,.62)}
+    /* lightbox */
+    .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+      background: rgba(0,0,0,.8); z-index:60; padding:20px}
+    .lightbox img{max-width:min(920px, 100%); max-height:80vh; border-radius:18px}
+    canvas{position:fixed;inset:0;pointer-events:none;z-index:70}
+  </style>
+</head>
+<body>
+  <!-- LOCK SCREEN -->
+  <div class="lock" id="lock">
+    <div class="lockbox">
+      <div class="badge">🔒 เว็บนี้มีรหัสลับ</div>
+      <h3>พิมพ์รหัสลับเพื่อเข้า</h3>
+      <p>Hint: วัน/เดือนที่สำคัญของเรา 😉</p>
+      <div class="row">
+        <input id="code" placeholder="เช่น 0214" inputmode="numeric" />
+      </div>
+      <div style="margin-top:10px">
+        <button class="btn" id="unlockBtn">ปลดล็อก</button>
+      </div>
+      <div class="small" style="margin-top:10px">*เปลี่ยนรหัสได้ในโค้ดตรง SECRET_CODE</div>
+    </div>
+  </div>
+
+  <canvas id="fx"></canvas>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="badge">💌 สำหรับคนพิเศษของเรา</div>
+      <h1 id="title">ถึงเธอคนเดียว 💖</h1>
+      <p class="sub" id="subtitle">
+        ขอบคุณที่อยู่ด้วยกันเสมอ — อันนี้เราทำให้เธอโดยเฉพาะ
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <div class="muted">ข้อความจากเรา</div>
+          <h2 style="margin:8px 0 10px;font-size:20px">“เราโชคดีมากที่มีเธอ”</h2>
+          <p class="muted" style="margin:0;line-height:1.7" id="message">
+            ตั้งแต่วันที่เราเจอกันจนถึงวันนี้ เราอยากให้เธอยิ้มได้ทุกวัน
+            และอยากให้รู้ว่า… เรารักเธอมาก ๆ
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="muted">กดปุ่มนี้สิ</div>
+          <p class="muted" style="margin:8px 0 12px;line-height:1.6">
+            มีอะไรเล็ก ๆ ที่อยากบอก…
+          </p>
+          <button class="btn" id="surpriseBtn">กดเพื่อเซอร์ไพรส์ 🎉</button>
+          <p class="muted" style="margin:10px 0 0;font-size:14px" id="after">
+            (กดแล้วดูเอฟเฟกต์ 😄)
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>รูปของเรา 📸</h2>
+      <div class="gallery" id="gallery">
+        <!-- เปลี่ยนรูปตรง src ได้เลย -->
+        <div class="ph"><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=800&q=80" alt=""></div>
+        <div class="ph"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&q=80" alt=""></div>
+        <div class="ph"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&q=80" alt=""></div>
+        <div class="ph"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800&q=80" alt=""></div>
+        <div class="ph"><img src="https://images.unsplash.com/photo-1520975958225-8d2f8b7f3bd1?w=800&q=80" alt=""></div>
+        <div class="ph"><img src="https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?w=800&q=80" alt=""></div>
+        <div class="ph"><img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?w=800&q=80" alt=""></div>
+        <div class="ph"><img src="https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?w=800&q=80" alt=""></div>
+      </div>
+      <p class="muted" style="margin-top:10px">
+        ทิป: ถ้าอยากใช้รูปตัวเอง ให้เอารูปไปอัปโหลดที่เดียวกันกับเว็บโฮสต์ (เช่น GitHub/Netlify) แล้วเปลี่ยน src เป็นชื่อไฟล์รูป
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>ไทม์ไลน์ความทรงจำ 🗓️</h2>
+      <div class="timeline" id="timeline">
+        <div class="item"><b>📍 วันที่เราเจอกัน</b><div class="muted">ใส่เรื่องราวสั้น ๆ ตรงนี้</div></div>
+        <div class="item"><b>🍜 มื้ออร่อยที่สุด</b><div class="muted">ใส่เรื่องราวสั้น ๆ ตรงนี้</div></div>
+        <div class="item"><b>🎬 เดทที่เราชอบ</b><div class="muted">ใส่เรื่องราวสั้น ๆ ตรงนี้</div></div>
+        <div class="item"><b>💍 คำสัญญา</b><div class="muted">ใส่ข้อความสัญญา/อนาคตตรงนี้</div></div>
+      </div>
+    </div>
+
+    <div class="section card">
+      <h2 style="margin:0 0 8px">ข้อความลับท้ายสุด 🤫</h2>
+      <p class="muted" style="margin:0;line-height:1.7">
+        ถ้าเธออ่านมาถึงตรงนี้… เรามีคำถามหนึ่ง: “เย็นนี้ไปเดทกันไหม?” 😳💖
+      </p>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox"><img id="lbImg" alt=""></div>
+
+  <script>
+    // ====== ตั้งรหัสลับตรงนี้ ======
+    const SECRET_CODE = "0214"; // เปลี่ยนเป็นรหัสของคุณ
+
+    // ====== Unlock ======
+    const lock = document.getElementById("lock");
+    const code = document.getElementById("code");
+    const unlockBtn = document.getElementById("unlockBtn");
+
+    function unlock(){
+      if ((code.value || "").trim() === SECRET_CODE){
+        lock.style.display = "none";
+      } else {
+        code.value = "";
+        code.placeholder = "รหัสไม่ถูก ลองใหม่อีกครั้ง";
+      }
+    }
+    unlockBtn.addEventListener("click", unlock);
+    code.addEventListener("keydown", (e)=>{ if(e.key==="Enter") unlock(); });
+
+    // ====== Lightbox gallery ======
+    const lightbox = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lbImg");
+    document.querySelectorAll(".ph img").forEach(img=>{
+      img.addEventListener("click", ()=>{
+        lbImg.src = img.src;
+        lightbox.style.display = "flex";
+      });
+    });
+    lightbox.addEventListener("click", ()=> lightbox.style.display = "none");
+
+    // ====== Confetti effect (simple) ======
+    const canvas = document.getElementById("fx");
+    const ctx = canvas.getContext("2d");
+    function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
+    addEventListener("resize", resize); resize();
+
+    let pieces = [];
+    function burst(){
+      const count = 180;
+      const x = innerWidth/2, y = innerHeight*0.25;
+      for(let i=0;i<count;i++){
+        pieces.push({
+          x,y,
+          vx:(Math.random()-0.5)*10,
+          vy:(Math.random()-1.2)*12,
+          g:0.25+Math.random()*0.18,
+          s:4+Math.random()*5,
+          r:Math.random()*Math.PI,
+          vr:(Math.random()-0.5)*0.3,
+          a:1
+        });
+      }
+    }
+    function tick(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      pieces = pieces.filter(p=>p.a>0.02 && p.y < innerHeight+60);
+      for(const p of pieces){
+        p.vy += p.g; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.a *= 0.99;
+        ctx.save();
+        ctx.globalAlpha = p.a;
+        ctx.translate(p.x,p.y);
+        ctx.rotate(p.r);
+        ctx.fillStyle = `hsl(${(p.x+p.y)%360}, 90%, 65%)`;
+        ctx.fillRect(-p.s/2, -p.s/2, p.s, p.s);
+        ctx.restore();
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+
+    // ====== Surprise button ======
+    document.getElementById("surpriseBtn").addEventListener("click", ()=>{
+      burst();
+      document.getElementById("after").textContent = "รักเธอที่สุดเลย ❤️";
+    });
+  </script>
+</body>
+</html>
