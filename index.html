@@ -7,20 +7,16 @@
 
   <style>
     :root{
-      --bg1:#ffe0f0;                 /* พื้นหลังชมพูหวาน */
-  --bg2:#ffc7e2;
-
-  --card: rgba(255,255,255,.92); /* การ์ดขาวทึบขึ้น = อ่านชัด */
-  --card2: rgba(255,255,255,.88);
-
-  --text:#2a0e1e;                /* ตัวอักษรเข้ม */
-  --muted:#6a1f46;               /* ข้อความรองชมพูเข้ม */
-
-  --accent:#ff2a83;              /* ชมพูเข้ม (ปุ่ม/ไฮไลต์) */
-  --accent2:#ff78b7;
-
-  --line: rgba(255,42,131,.48);  /* เส้นขอบชมพูชัด */
-  --shadow: 0 20px 80px rgba(255,42,131,.28);
+      --bg1:#fff0f6;
+      --bg2:#ffe3f1;
+      --card: rgba(255,255,255,.78);
+      --card2: rgba(255,255,255,.62);
+      --text:#3a2133;
+      --muted:#6b4b5d;
+      --accent:#ff4d9a;
+      --accent2:#ff89c2;
+      --line: rgba(255,77,154,.22);
+      --shadow: 0 18px 60px rgba(255,77,154,.18);
     }
     *{box-sizing:border-box}
     body{
@@ -29,20 +25,17 @@
       color:var(--text);
       min-height:100vh;
       background:
-         radial-gradient(900px 600px at 15% 10%, rgba(255,42,131,.28) 0%, transparent 55%),
-  radial-gradient(900px 600px at 85% 20%, rgba(255,120,183,.26) 0%, transparent 55%),
-  radial-gradient(800px 520px at 50% 90%, rgba(255,255,255,.96) 0%, transparent 65%),
-  linear-gradient(180deg, var(--bg1), var(--bg2));
+        radial-gradient(900px 600px at 15% 10%, rgba(255,77,154,.20) 0%, transparent 55%),
+        radial-gradient(900px 600px at 85% 20%, rgba(255,137,194,.22) 0%, transparent 55%),
+        radial-gradient(800px 520px at 50% 90%, rgba(255,255,255,.95) 0%, transparent 65%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
     }
     .wrap{max-width:980px;margin:0 auto;padding:22px}
     .hero{
       border-radius:26px;
-     background: linear-gradient(135deg,
-  rgba(255, 240, 246, .95),
-  rgba(255, 227, 241, .88)
-);
-     border:1px solid rgba(255,77,154,.40);
-     box-shadow: 0 18px 60px rgba(255,77,154,.20);
+      background: linear-gradient(135deg, rgba(255,255,255,.76), rgba(255,255,255,.52));
+      border:1px solid var(--line);
+      box-shadow: var(--shadow);
       padding:22px;
       position:relative;
       overflow:hidden;
@@ -78,15 +71,6 @@
     }
     .card.soft{ background:var(--card2); }
     .muted{color:var(--muted)}
-    .pill .muted{
-  color: rgba(58,33,51,.92);
-}
-.pill p.muted{
-  font-weight: 600;
-}
-#after{
-  color: rgba(58,33,51,.78);
-}
     .small{font-size:13px;color:rgba(107,75,93,.88); line-height:1.5}
 
     .btn{
@@ -135,22 +119,19 @@
       border-radius:18px;
       padding:12px;
       border:1px solid var(--line);
-     background: rgba(255,255,255,.94);
+      background: rgba(255,255,255,.88);
     }
     .minirow{display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
     .minirow .btn{width:auto; padding:10px 12px; border-radius:14px}
     .minirow input[type="range"]{width:100%}
     .status{
-       margin-top:8px;
-  padding:10px 12px;
-  border-radius:14px;
-
-  border:1px solid rgba(255,77,154,.55);     /* ชัดขึ้น */
-  background: rgba(255,255,255,.92);         /* ขาวทึบขึ้น */
-  color: rgba(58,33,51,.92);                 /* ตัวอักษรเข้มขึ้น */
-
-  font-size:13px;
-  font-weight:600;             
+      margin-top:8px;
+      padding:8px 10px;
+      border-radius:14px;
+      border:1px dashed rgba(255,77,154,.35);
+      background: rgba(255,255,255,.65);
+      font-size:13px;
+      color: rgba(58,33,51,.85);
     }
 
     /* gallery */
@@ -223,15 +204,15 @@
       <p>Hint: วัน/เดือนที่สำคัญของเรา 😉</p>
 
       <div class="row">
-        <input id="code" placeholder="วันอะไรน้าาา ใช่วันครบรอบอะป่าว" inputmode="numeric" />
+        <input id="code" placeholder="รหัสอะไรน้าา ใช่วันครบรอบอะป่าววว" inputmode="numeric" />
       </div>
 
       <div style="margin-top:10px; display:grid; gap:10px">
         <button class="btn" id="unlockBtn">ปลดล็อก (เริ่มเพลงให้ด้วย) 🎵</button>
-        <!-- <button class="btn ghost" id="muteAllBtn">ปิดเสียงทั้งหมดก่อน (ถ้าตกใจ 😳)</button> -->
+        <button class="btn ghost" id="muteAllBtn">ปลดล็อก (เริ่มเพลงให้ด้วย) 🎵 เหมือนกันแค่เป็นสีขาว</button>
       </div>
 
-      
+     
     </div>
   </div>
 
@@ -293,7 +274,7 @@
               </div>
 
               <div class="status" id="bgmStatus">สถานะ: รอเช็กไฟล์…</div>
-             
+              <div class="small">มือถือจะให้เล่นหลัง “กดปุ่ม” เท่านั้น (ปกติเลย)</div>
             </div>
 
             <div class="pill">
@@ -312,16 +293,7 @@
               <div class="status" id="voiceStatus">สถานะ: รอเช็กไฟล์…</div>
             </div>
 
-            <div class="pill">
-              <div class="muted">กดปุ่มนี้สิ</div>
-              <p class="muted" style="margin:8px 0 12px;line-height:1.6">
-                มีอะไรเล็ก ๆ ที่อยากบอก…
-              </p>
-              <button class="btn" id="surpriseBtn">กดเพื่อเซอร์ไพรส์ 🎉</button>
-              <p class="muted" style="margin:10px 0 0;font-size:14px" id="after">
-                (กดแล้วดูเอฟเฟกต์ 😄)
-              </p>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -347,7 +319,7 @@
       <div class="timeline">
         <div class="item"><b>🌷 วันที่เราเริ่มคบกัน</b><div class="muted">25/07/2025</div></div>
         <div class="item"><b>🍰 เดทที่เราชอบที่สุด</b><div class="muted">ความสุขของเราไม่ได้อยู่ที่ว่าไปไหน แต่มันอยู่ที่ว่าไปกับใคร ซึ่งคนนั้นคือเธอ</div></div>
-        <div class="item"><b>📷 รูปที่ทำให้ยิ้มทุกที</b><div class="muted">ใส่ความหมายของรูปนั้น</div></div>
+        
         <div class="item"><b>💞 คำสัญญา</b><div class="muted">เค้าจะตั้งใจรักเธอ และอยู่กับเธอไปนาน 💖</div></div>
       </div>
     </div>
@@ -355,7 +327,8 @@
     <div class="section card">
       <h2 style="margin:0 0 8px">ข้อความลับท้ายสุด 🤫</h2>
       <p class="muted" style="margin:0;line-height:1.8" id="finalMsg">
-        เค้ารักเธอที่สุดเลยนะครับ 💖
+       ขอบคุณที่อยู่เคียงข้างและเป็นกำลังใจให้กันเสมอมานะ
+       <br>รักเธอที่สุดในโลกเลยครับ 💖
       </p>
     </div>
   </div>
